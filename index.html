@@ -3,572 +3,372 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema Autónomo de Enfrentamientos — ILDRA</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<title>Sistema Autonomo de Enfrentamientos — ILDRA</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0f;
-  --bg2: #10101a;
-  --bg3: #161624;
-  --panel: #1a1a2e;
-  --panel2: #12122a;
-  --border: #2a2a50;
-  --border2: #3a3a70;
-  --gold: #c9a84c;
-  --gold2: #e8c97a;
-  --gold3: #f5e0a0;
-  --crimson: #8b1a1a;
-  --crimson2: #c0392b;
-  --crimson3: #e74c3c;
-  --teal: #1a5a6a;
-  --teal2: #2a8a9a;
-  --teal3: #4ac8d8;
-  --purple: #2a1a4a;
-  --purple2: #5a3a8a;
-  --purple3: #9b6dca;
-  --text: #d4c9b0;
-  --text2: #a09880;
-  --text3: #6a6050;
-  --white: #f0ead8;
-  --easy: #4a8a4a;
-  --medium: #8a8a2a;
-  --hard: #8a4a2a;
-  --epic: #6a2a8a;
-  --legendary: #8a1a3a;
-  --shadow: 0 4px 32px rgba(0,0,0,0.8);
-  --glow-gold: 0 0 12px rgba(201,168,76,0.4);
-  --glow-red: 0 0 12px rgba(199,57,44,0.4);
-  --glow-teal: 0 0 12px rgba(74,200,216,0.3);
+  --bg:     #000000;
+  --bg2:    #0d0d0d;
+  --bg3:    #151515;
+  --border: #3a3a3a;
+  --brite:  #cccccc;
+  --mid:    #888888;
+  --dim:    #555555;
+  --white:  #ffffff;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background: var(--bg);
-  color: var(--text);
-  font-family: 'IM Fell English', serif;
+  color: var(--brite);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
   min-height: 100vh;
-  background-image:
-    radial-gradient(ellipse at 20% 20%, rgba(42,26,74,0.3) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 80%, rgba(139,26,26,0.15) 0%, transparent 60%),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* HEADER */
+/* ── HEADER ─────────────────────────── */
 .header {
   text-align: center;
-  padding: 36px 20px 24px;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(26,26,46,0.9) 0%, transparent 100%);
-  position: relative;
-}
-.header::after {
-  content: '';
-  position: absolute;
-  bottom: -1px; left: 10%; right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  padding: 18px 20px 14px;
+  border-bottom: 2px solid var(--brite);
+  background: var(--bg2);
 }
 .header h1 {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: clamp(16px, 3vw, 28px);
-  font-weight: 900;
-  color: var(--gold2);
-  letter-spacing: 0.12em;
-  text-shadow: 0 0 30px rgba(201,168,76,0.5), var(--glow-gold);
-  margin-bottom: 8px;
-}
-.header h2 {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(10px, 1.5vw, 13px);
+  font-size: clamp(11px, 2.2vw, 18px);
   font-weight: 400;
-  color: var(--text2);
+  color: var(--white);
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  margin-bottom: 5px;
 }
-.rune-divider {
-  font-size: 18px;
-  color: var(--gold);
-  opacity: 0.5;
-  letter-spacing: 8px;
-  margin: 10px 0 0;
+.header h2 {
+  font-size: 10px;
+  color: var(--mid);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
+.rune-divider { font-size: 11px; color: var(--dim); letter-spacing: 5px; margin-top: 7px; }
 
-/* LAYOUT */
-.main-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 0;
-}
-
-/* ARENA */
+/* ── LAYOUT ──────────────────────────── */
 .arena {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  min-height: 100px;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
 }
-@media (max-width: 900px) {
-  .arena { grid-template-columns: 1fr; }
-}
+@media (max-width:1400px) { .arena { grid-template-columns: repeat(3,1fr); } }
+@media (max-width:1050px) { .arena { grid-template-columns: repeat(2,1fr); } }
+@media (max-width:600px)  { .arena { grid-template-columns: 1fr; } }
 
-/* TURN BAR */
+/* ── TURN BAR ───────────────────────── */
 .turn-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  background: linear-gradient(90deg, var(--panel2), var(--panel), var(--panel2));
+  padding: 9px 18px;
+  background: var(--bg2);
   border-bottom: 1px solid var(--border);
   border-top: 1px solid var(--border);
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 .turn-counter {
-  font-family: 'Cinzel', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--gold2);
-  text-shadow: var(--glow-gold);
+  font-size: 17px;
+  color: var(--white);
+  letter-spacing: 0.04em;
 }
-.turn-counter span { font-size: 13px; color: var(--text2); margin-right: 6px; font-weight: 400; }
-.turn-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.turn-counter span { font-size: 10px; color: var(--mid); margin-right: 5px; }
+.turn-actions { display: flex; gap: 7px; flex-wrap: wrap; }
 
-/* BTN SYSTEM */
+/* ── BUTTONS ─────────────────────────── */
 .btn {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  padding: 8px 16px;
-  border: 1px solid;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 6px 13px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--mid);
   cursor: pointer;
-  transition: all 0.2s;
   text-transform: uppercase;
-  font-weight: 600;
+  border-radius: 0;
+  transition: background .12s, color .12s, border-color .12s;
 }
-.btn-gold {
-  background: linear-gradient(135deg, var(--gold) 0%, #a07830 100%);
-  border-color: var(--gold2);
-  color: #1a1000;
-  box-shadow: var(--glow-gold);
-}
-.btn-gold:hover { background: linear-gradient(135deg, var(--gold2), var(--gold)); filter: brightness(1.1); }
-.btn-crimson {
-  background: linear-gradient(135deg, var(--crimson) 0%, #5a0a0a 100%);
-  border-color: var(--crimson2);
-  color: var(--white);
-  box-shadow: var(--glow-red);
-}
-.btn-crimson:hover { background: linear-gradient(135deg, var(--crimson2), var(--crimson)); }
-.btn-teal {
-  background: linear-gradient(135deg, var(--teal) 0%, #0a2a3a 100%);
-  border-color: var(--teal2);
-  color: var(--white);
-}
-.btn-teal:hover { background: linear-gradient(135deg, var(--teal2), var(--teal)); }
-.btn-ghost {
-  background: transparent;
-  border-color: var(--border2);
-  color: var(--text2);
-}
-.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-.btn-sm { font-size: 10px; padding: 5px 10px; }
-.btn-danger {
-  background: linear-gradient(135deg, #5a0000, #3a0000);
-  border-color: var(--crimson3);
-  color: var(--crimson3);
-}
-.btn-danger:hover { background: linear-gradient(135deg, var(--crimson), #5a0000); color: var(--white); }
-.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn:hover { background: var(--bg3); color: var(--white); border-color: var(--brite); }
+.btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.btn-sm { font-size: 9px; padding: 4px 9px; }
 
-/* ENEMY SLOT */
+.btn-primary  { border-color: var(--white); color: var(--white); }
+.btn-primary:hover { background: var(--white); color: var(--bg); }
+
+.btn-action   { border-color: var(--brite); color: var(--brite); }
+.btn-action:hover { background: var(--brite); color: var(--bg); }
+
+.btn-danger   { border-color: var(--mid); color: var(--mid); }
+.btn-danger:hover { background: var(--mid); color: var(--bg); }
+
+/* ── ENEMY SLOT ─────────────────────── */
 .enemy-slot {
   border-right: 1px solid var(--border);
-  position: relative;
-  transition: all 0.3s;
+  border-bottom: 1px solid var(--border);
 }
 .enemy-slot:last-child { border-right: none; }
-.enemy-slot.dead-slot { opacity: 0.35; filter: grayscale(0.8); }
+.enemy-slot.dead-slot { opacity: 0.28; }
 
 .slot-header {
-  background: linear-gradient(135deg, var(--panel), var(--bg2));
-  padding: 14px 16px 10px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.slot-number {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 10px;
-  color: var(--gold);
-  letter-spacing: 0.15em;
-  opacity: 0.7;
-}
-.slot-status {
-  font-size: 10px;
-  padding: 2px 8px;
-  border: 1px solid;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 0.08em;
-}
-.status-active { border-color: var(--teal2); color: var(--teal3); background: rgba(26,90,106,0.3); }
-.status-dead { border-color: var(--crimson2); color: var(--crimson3); background: rgba(139,26,26,0.3); }
-.status-inactive { border-color: var(--border2); color: var(--text3); }
-
-.slot-body { padding: 16px; }
-
-/* ENEMY CONFIG FORM */
-.config-section {
-  background: rgba(0,0,0,0.3);
-  border: 1px solid var(--border);
-  padding: 14px;
-  margin-bottom: 12px;
-}
-.config-section-title {
-  font-family: 'Cinzel', serif;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--border);
-}
-
-.form-row { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
-.form-group { flex: 1; min-width: 90px; }
-.form-group label {
-  display: block;
-  font-size: 9px;
-  color: var(--text2);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 3px;
-  font-family: 'Share Tech Mono', monospace;
-}
-.form-group input, .form-group select, .form-group textarea {
-  width: 100%;
-  background: var(--bg);
-  border: 1px solid var(--border2);
-  color: var(--text);
-  padding: 6px 8px;
-  font-family: 'IM Fell English', serif;
-  font-size: 13px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 8px rgba(201,168,76,0.2);
-}
-.form-group textarea { resize: vertical; min-height: 56px; font-size: 12px; }
-.form-group select option { background: var(--bg2); }
-
-/* HP BAR */
-.hp-section {
-  margin-bottom: 12px;
-}
-.hp-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-}
-.hp-label-text {
-  font-family: 'Cinzel', serif;
-  font-size: 10px;
-  color: var(--text2);
-  letter-spacing: 0.1em;
-}
-.hp-value {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 16px;
-  color: var(--gold2);
-  font-weight: 700;
-}
-.hp-value.low { color: var(--crimson3); }
-.hp-value.critical { color: #ff6666; animation: pulse 1s infinite; }
-@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
-.hp-bar-track {
-  height: 8px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-}
-.hp-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--easy), var(--gold));
-  transition: width 0.4s, background 0.4s;
-  position: relative;
-}
-.hp-bar-fill::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(90deg, transparent 70%, rgba(255,255,255,0.15));
-}
-.hp-bar-fill.hp-low { background: linear-gradient(90deg, var(--crimson), var(--crimson2)); }
-.hp-bar-fill.hp-critical { background: linear-gradient(90deg, #5a0000, var(--crimson3)); animation: flash-bar 0.8s infinite; }
-@keyframes flash-bar { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
-
-.hp-adjust { display: flex; gap: 6px; margin-top: 6px; align-items: center; flex-wrap: wrap; }
-.hp-adjust input {
-  width: 70px;
-  background: var(--bg);
-  border: 1px solid var(--border2);
-  color: var(--text);
-  padding: 5px 8px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 14px;
-  text-align: center;
-  outline: none;
-}
-.hp-adjust-label { font-size: 10px; color: var(--text3); font-family: 'Share Tech Mono', monospace; }
-
-/* STATS ROW */
-.stats-row {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-}
-.stat-chip {
-  flex: 1;
-  min-width: 70px;
   background: var(--bg2);
-  border: 1px solid var(--border);
-  padding: 6px 8px;
-  text-align: center;
-}
-.stat-chip-label {
-  font-size: 8px;
-  color: var(--text3);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-family: 'Share Tech Mono', monospace;
-  display: block;
-  margin-bottom: 2px;
-}
-.stat-chip-val {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 13px;
-  color: var(--gold2);
-  font-weight: 700;
-}
-
-/* EFFECTS */
-.effects-bar {
+  padding: 11px 13px 9px;
+  border-bottom: 1px solid var(--border);
   display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-  min-height: 24px;
-  margin-bottom: 10px;
   align-items: center;
-}
-.effect-tag {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9px;
-  padding: 2px 7px;
-  border: 1px solid;
+  justify-content: space-between;
   cursor: pointer;
-  letter-spacing: 0.05em;
-  position: relative;
-  transition: all 0.2s;
+  user-select: none;
 }
-.effect-tag:hover { filter: brightness(1.3); }
-.effect-tag.burn { border-color: #d4522a; color: #f0804a; background: rgba(180,60,20,0.2); }
-.effect-tag.poison { border-color: #4a8a2a; color: #7ac84a; background: rgba(60,110,20,0.2); }
-.effect-tag.bleed { border-color: #8a1a2a; color: #e04a5a; background: rgba(120,20,30,0.2); }
-.effect-tag.stun { border-color: #8a8a1a; color: #d4d44a; background: rgba(120,120,20,0.2); }
-.effect-tag.regen { border-color: #1a8a5a; color: #4ad48a; background: rgba(20,120,70,0.2); }
-.effect-tag.marked { border-color: #6a2a8a; color: #b04ae0; background: rgba(90,30,120,0.2); }
-.effect-tag .effect-turns {
-  margin-left: 3px;
-  font-size: 8px;
-  opacity: 0.8;
-}
-.no-effects { font-size: 10px; color: var(--text3); font-family: 'Share Tech Mono', monospace; }
+.slot-header:hover { background: var(--bg3); }
 
-.add-effect-row { display: flex; gap: 6px; flex-wrap: wrap; }
-.add-effect-row select, .add-effect-row input {
-  background: var(--bg);
-  border: 1px solid var(--border2);
-  color: var(--text);
-  padding: 4px 7px;
-  font-size: 11px;
-  font-family: 'IM Fell English', serif;
-  outline: none;
-}
-.add-effect-row input { width: 55px; }
+.slot-num  { font-size: 9px; color: var(--dim); letter-spacing: 0.1em; }
+.slot-name { font-size: 10px; color: var(--mid); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 110px; margin-left: 7px; }
 
-/* ABILITY */
-.ability-section {
-  background: rgba(42,26,74,0.2);
-  border: 1px solid rgba(90,58,138,0.4);
-  padding: 12px;
-  margin-bottom: 10px;
-}
-.ability-title {
-  font-family: 'Cinzel', serif;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: var(--purple3);
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.ability-cd-badge {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 10px;
-  padding: 2px 8px;
-  border: 1px solid var(--purple2);
-  color: var(--purple3);
-  background: rgba(42,26,74,0.4);
-}
-.ability-cd-badge.ready { border-color: var(--teal2); color: var(--teal3); background: rgba(26,90,106,0.3); }
-
-/* DICE EXTRAS */
-.dice-extras-row {
-  display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
-  margin-top: 6px;
-}
-.dice-extra-group {
-  display: flex; flex-direction: column; align-items: center; gap: 2px;
-}
-.dice-extra-group label {
-  font-size: 9px; color: var(--text3);
-  font-family: 'Share Tech Mono', monospace;
-  letter-spacing: 0.1em; text-transform: uppercase;
-}
-.dice-extra-group select {
-  background: var(--bg);
-  border: 1px solid var(--border2);
-  color: var(--text);
-  padding: 4px 6px;
-  font-size: 11px;
-  font-family: 'Share Tech Mono', monospace;
-  outline: none;
-}
-
-/* HISTORY / LOG */
-.log-panel {
-  border-top: 1px solid var(--border);
-  background: var(--bg2);
-}
-.log-header {
-  padding: 10px 20px;
-  background: var(--panel2);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.log-header-title {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  color: var(--gold);
-  text-transform: uppercase;
-}
-.log-body {
-  padding: 12px 16px;
-  max-height: 340px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.log-body::-webkit-scrollbar { width: 4px; }
-.log-body::-webkit-scrollbar-track { background: var(--bg); }
-.log-body::-webkit-scrollbar-thumb { background: var(--border2); }
-
-.log-entry {
-  font-size: 12px;
-  line-height: 1.5;
-  padding: 8px 12px;
-  border-left: 3px solid var(--border2);
-  background: rgba(0,0,0,0.3);
-  font-family: 'IM Fell English', serif;
-  animation: fadeIn 0.3s ease;
-}
-@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-.log-entry.turn-divider {
-  border-left-color: var(--gold);
-  background: linear-gradient(90deg, rgba(201,168,76,0.1), transparent);
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  color: var(--gold2);
-  letter-spacing: 0.1em;
-}
-.log-entry.attack { border-left-color: var(--crimson2); }
-.log-entry.skill { border-left-color: var(--purple2); }
-.log-entry.effect { border-left-color: #4a8a2a; }
-.log-entry.death { border-left-color: var(--crimson3); color: var(--crimson3); font-weight: bold; }
-.log-entry.reward { border-left-color: var(--gold); color: var(--gold2); }
-.log-entry.info { border-left-color: var(--teal2); color: var(--text2); font-style: italic; }
-
-.log-entry .copy-btn {
-  float: right;
+.slot-badge {
   font-size: 9px;
   padding: 1px 6px;
+  border: 1px solid var(--dim);
+  color: var(--dim);
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+.slot-badge.active { border-color: var(--white); color: var(--white); }
+.slot-badge.dead   { border-color: var(--dim);   color: var(--dim); }
+
+.slot-arrow {
+  font-size: 9px;
+  color: var(--dim);
+  margin-left: 6px;
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.slot-arrow.open { transform: rotate(90deg); color: var(--brite); }
+
+.slot-body {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .3s ease, padding .2s ease;
+  padding: 0;
+}
+.slot-body.expanded {
+  max-height: 2200px;
+  padding: 13px;
+}
+
+/* ── FORMS ───────────────────────────── */
+.section-box {
+  border: 1px solid var(--border);
   background: var(--bg);
-  border: 1px solid var(--border2);
-  color: var(--text3);
-  cursor: pointer;
-  font-family: 'Share Tech Mono', monospace;
-  margin-left: 8px;
-  transition: all 0.2s;
+  padding: 10px;
+  margin-bottom: 9px;
 }
-.log-entry .copy-btn:hover { border-color: var(--gold); color: var(--gold); }
-
-/* ACCION BLOCK */
-.discord-block {
-  background: rgba(88,101,242,0.1);
-  border: 1px solid rgba(88,101,242,0.4);
-  padding: 10px 14px;
-  margin: 4px 0;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  color: #b8bfff;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  cursor: pointer;
-  position: relative;
-}
-.discord-block:hover { border-color: rgba(88,101,242,0.8); }
-.discord-block::before {
-  content: '◈ ACCIÓN DEL TURNO';
-  font-size: 8px;
-  color: rgba(88,101,242,0.8);
-  display: block;
-  margin-bottom: 4px;
-  letter-spacing: 0.15em;
-}
-.discord-copied {
-  position: absolute; top: 4px; right: 8px;
-  font-size: 9px; color: var(--teal3);
-  opacity: 0; transition: opacity 0.3s;
-}
-.discord-copied.show { opacity: 1; }
-
-/* SETUP PANEL */
-.setup-panel {
-  padding: 20px;
+.section-title {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--white);
+  text-transform: uppercase;
+  padding-bottom: 5px;
   border-bottom: 1px solid var(--border);
-  background: var(--panel2);
+  margin-bottom: 9px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+.section-title:hover { color: var(--white); }
+.sec-arrow { font-size: 8px; color: var(--dim); transition: transform .2s; }
+.sec-arrow.open { transform: rotate(90deg); }
+.collapsible { overflow: hidden; transition: max-height .25s ease; }
+
+.form-row { display: flex; gap: 7px; margin-bottom: 7px; flex-wrap: wrap; }
+.form-group { flex: 1; min-width: 85px; }
+.form-group label {
+  display: block;
+  font-size: 8px;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--brite);
+  padding: 5px 7px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  outline: none;
+  border-radius: 0;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--white); color: var(--white); }
+.form-group textarea { resize: vertical; min-height: 48px; font-size: 11px; }
+.form-group select option { background: var(--bg2); color: var(--brite); }
+
+/* ── HP BAR (segmented) ─────────────── */
+.hp-section { margin-bottom: 10px; }
+.hp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.hp-lbl { font-size: 8px; color: var(--dim); letter-spacing: 0.12em; }
+.hp-val { font-size: 13px; color: var(--white); }
+.hp-val.low      { color: var(--mid); }
+.hp-val.critical { color: var(--white); animation: blink .65s step-end infinite; }
+@keyframes blink { 50% { opacity: .15; } }
+
+.hp-bar {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: var(--white);
+}
+.hp-bar .e { color: var(--border); }
+.hp-bar.low      .f { color: var(--mid); }
+.hp-bar.critical .f { animation: blink .65s step-end infinite; }
+
+.hp-adjust { display: flex; gap: 5px; margin-top: 6px; align-items: center; flex-wrap: wrap; }
+.hp-adjust input {
+  width: 60px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--brite);
+  padding: 4px 6px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  text-align: center;
+  outline: none;
+  border-radius: 0;
+}
+.hp-adjust input:focus { border-color: var(--white); }
+.hp-adj-lbl { font-size: 8px; color: var(--dim); }
+
+/* ── STAT CHIPS ──────────────────────── */
+.stats-row { display: flex; gap: 5px; margin-bottom: 9px; flex-wrap: wrap; }
+.stat-chip {
+  flex: 1; min-width: 60px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 5px 6px;
+  text-align: center;
+}
+.stat-chip span:first-child {
+  display: block;
+  font-size: 7px;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.stat-chip span:last-child { font-size: 11px; color: var(--white); }
+
+/* ── DAMAGE SECTION ──────────────────── */
+.dmg-section {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  padding: 9px 10px;
+  margin-bottom: 9px;
+}
+.dmg-title {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: var(--white);
+  text-transform: uppercase;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.dmg-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+@media (max-width:400px) { .dmg-cols { grid-template-columns: 1fr; } }
+.dmg-col {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 7px;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.dmg-col-lbl {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--border);
+  color: var(--brite);
+}
+.dmg-col-hint { font-size: 9px; color: var(--dim); line-height: 1.4; }
+.dmg-col-row { display: flex; gap: 5px; align-items: center; }
+.dmg-col-row input {
+  flex: 1; min-width: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--brite);
+  padding: 4px 5px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  text-align: center;
+  outline: none;
+  border-radius: 0;
+}
+.dmg-col-row input:focus { border-color: var(--white); }
+
+/* ── ABILITY SECTION ─────────────────── */
+.abil-status {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 8px;
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.abil-status-lbl { font-size: 9px; color: var(--mid); letter-spacing: 0.1em; }
+.cd-badge {
+  font-size: 9px;
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  color: var(--dim);
+}
+.cd-badge.ready { border-color: var(--white); color: var(--white); }
+
+.dice-row { display: flex; gap: 5px; flex-wrap: wrap; align-items: flex-end; margin-top: 6px; }
+.dice-grp { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.dice-grp label { font-size: 8px; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; }
+.dice-grp select {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--brite);
+  padding: 3px 5px;
+  font-size: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  outline: none;
+  border-radius: 0;
+}
+
+/* ── SETUP PANEL ─────────────────────── */
+.setup-panel {
+  padding: 14px 16px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
 }
 .setup-title {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--white);
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -577,123 +377,148 @@ body {
   content: '';
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border2));
+  background: var(--border);
 }
-.setup-title::after { background: linear-gradient(90deg, var(--border2), transparent); }
-
-.encounter-gen {
-  background: rgba(0,0,0,0.4);
+.enc-gen {
+  background: var(--bg);
   border: 1px solid var(--border);
-  padding: 14px;
-  margin-bottom: 14px;
+  padding: 11px;
+  margin-bottom: 11px;
 }
-.encounter-gen-title {
-  font-family: 'Cinzel', serif;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  color: var(--teal3);
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.gen-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+.enc-gen-title { font-size: 9px; letter-spacing: 0.1em; color: var(--mid); text-transform: uppercase; margin-bottom: 9px; }
+.gen-row { display: flex; gap: 9px; flex-wrap: wrap; align-items: flex-end; }
 .gen-result {
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: rgba(74,200,216,0.08);
-  border: 1px solid rgba(74,200,216,0.2);
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  color: var(--teal3);
-  line-height: 1.6;
-}
-
-/* Enemy active/turn highlight */
-.enemy-slot.active-turn {
-  box-shadow: inset 0 0 0 2px rgba(201,168,76,0.3);
-}
-.enemy-slot.active-turn .slot-header {
-  background: linear-gradient(135deg, rgba(201,168,76,0.1), var(--panel));
-}
-
-/* Reward display */
-.reward-box {
-  background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(120,90,20,0.1));
-  border: 1px solid var(--gold);
-  padding: 10px 14px;
-  margin: 4px 0;
-  font-family: 'Cinzel', serif;
-  font-size: 12px;
-  color: var(--gold2);
-  text-align: center;
-}
-
-/* Scroll to top of log */
-.scroll-hint {
-  text-align: center;
-  padding: 6px;
+  margin-top: 9px;
+  padding: 7px 10px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
   font-size: 10px;
-  color: var(--text3);
-  font-family: 'Share Tech Mono', monospace;
-  cursor: pointer;
+  color: var(--mid);
+  line-height: 1.6;
+  display: none;
 }
 
-/* TOGGLE sections */
-.section-toggle {
+/* ── LOG ─────────────────────────────── */
+.log-panel {
+  border-top: 2px solid var(--brite);
+  background: var(--bg2);
+}
+.log-header {
+  padding: 8px 16px;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  cursor: pointer;
-  user-select: none;
+  align-items: center;
 }
-.section-toggle:hover .config-section-title { color: var(--gold2); }
-.toggle-arrow { font-size: 10px; color: var(--text3); transition: transform 0.2s; }
-.toggle-arrow.open { transform: rotate(90deg); }
-.collapsible { overflow: hidden; transition: max-height 0.3s ease; }
+.log-title { font-size: 9px; letter-spacing: 0.16em; color: var(--white); text-transform: uppercase; }
+.log-body {
+  padding: 9px 13px;
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.log-body::-webkit-scrollbar { width: 3px; }
+.log-body::-webkit-scrollbar-track { background: var(--bg); }
+.log-body::-webkit-scrollbar-thumb { background: var(--border); }
 
-/* Notification */
+.log-entry {
+  font-size: 11px;
+  line-height: 1.5;
+  padding: 5px 9px;
+  border-left: 2px solid var(--border);
+  background: var(--bg);
+  font-family: 'Share Tech Mono', monospace;
+}
+.log-entry.turn-divider {
+  border-left-color: var(--white);
+  background: var(--bg3);
+  font-size: 10px;
+  color: var(--white);
+  letter-spacing: 0.09em;
+}
+.log-entry.attack  { border-left-color: var(--brite); color: var(--brite); }
+.log-entry.skill   { border-left-color: var(--mid); }
+.log-entry.effect  { border-left-color: var(--dim); }
+.log-entry.death   { border-left-color: var(--white); color: var(--white); }
+.log-entry.reward  { border-left-color: var(--brite); color: var(--brite); }
+.log-entry.info    { border-left-color: var(--dim); color: var(--dim); }
+
+/* ── COPY BLOCK ──────────────────────── */
+.copy-block {
+  background: var(--bg2);
+  border: 1px solid var(--brite);
+  padding: 7px 11px;
+  margin: 3px 0;
+  font-size: 10px;
+  color: var(--mid);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  cursor: pointer;
+  position: relative;
+}
+.copy-block:hover { border-color: var(--white); color: var(--brite); }
+.copy-block::before {
+  content: '> ACCION DEL TURNO -- clic para copiar';
+  font-size: 8px;
+  color: var(--dim);
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: 0.1em;
+}
+.copied-badge {
+  position: absolute; top: 4px; right: 8px;
+  font-size: 8px; color: var(--white);
+  opacity: 0; transition: opacity .2s;
+}
+.copied-badge.show { opacity: 1; }
+
+/* ── NOTIFICATION ────────────────────── */
 .notif {
   position: fixed;
-  bottom: 20px; right: 20px;
-  background: var(--panel);
-  border: 1px solid var(--gold);
-  padding: 10px 16px;
-  font-family: 'Cinzel', serif;
-  font-size: 12px;
-  color: var(--gold2);
+  bottom: 16px; right: 16px;
+  background: var(--bg3);
+  border: 1px solid var(--white);
+  padding: 7px 13px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--white);
   z-index: 9999;
-  box-shadow: var(--shadow), var(--glow-gold);
-  animation: slideIn 0.3s ease;
-  max-width: 280px;
+  max-width: 250px;
+  letter-spacing: 0.05em;
 }
-@keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: none; opacity: 1; } }
 
-/* Mobile adjustments */
-@media (max-width: 600px) {
-  .slot-body { padding: 10px; }
-  .turn-bar { padding: 8px 12px; }
-  .header h1 { font-size: 15px; }
+/* ── MISC ────────────────────────────── */
+.empty-arena {
+  padding: 38px;
+  text-align: center;
+  color: var(--dim);
+  font-size: 11px;
+  grid-column: 1 / -1;
 }
 </style>
 </head>
 <body>
 
 <header class="header">
-  <h1>⚔ SISTEMA AUTÓNOMO DE ENFRENTAMIENTOS ⚔</h1>
-  <h2>Gestión automática de enemigos por turnos — Sistema de Rol ILDRA</h2>
-  <div class="rune-divider">᛭ ᛭ ᛭</div>
+  <h1>++ SISTEMA AUTONOMO DE ENFRENTAMIENTOS ++</h1>
+  <h2>Gestion automatica de enemigos por turnos -- Sistema de Rol ILDRA</h2>
+  <div class="rune-divider">-+- -+- -+-</div>
 </header>
 
 <!-- SETUP PANEL -->
 <div class="setup-panel">
-  <div class="setup-title">Generador de encuentro</div>
-  <div class="encounter-gen">
-    <div class="encounter-gen-title">▶ Tirar dados de aparición automática</div>
+  <div class="setup-title">Generador de Encuentro</div>
+  <div class="enc-gen">
+    <div class="enc-gen-title">> Tirar dados de aparicion automatica</div>
     <div class="gen-row">
-      <div class="form-group" style="min-width:120px">
-        <label>N° Personajes</label>
+      <div class="form-group" style="min-width:110px">
+        <label>N Personajes</label>
         <input type="number" id="gen-players" value="2" min="1" max="10">
       </div>
-      <div class="form-group" style="min-width:130px">
+      <div class="form-group" style="min-width:125px">
         <label>Modificador zona</label>
         <select id="gen-zone">
           <option value="0">Zona normal (+0)</option>
@@ -702,7 +527,7 @@ body {
           <option value="20">Evento especial (+20)</option>
         </select>
       </div>
-      <div class="form-group" style="min-width:120px">
+      <div class="form-group" style="min-width:115px">
         <label>Recorte de dado</label>
         <select id="gen-cut">
           <option value="100">Sin recorte (1d100)</option>
@@ -712,16 +537,15 @@ body {
         </select>
       </div>
       <div style="display:flex;align-items:flex-end">
-        <button class="btn btn-teal" onclick="generateEncounter()">⚄ Generar Encuentro</button>
+        <button class="btn btn-action" onclick="generateEncounter()">[d] Generar Encuentro</button>
       </div>
     </div>
-    <div id="gen-result" class="gen-result" style="display:none"></div>
+    <div id="gen-result" class="gen-result"></div>
   </div>
-
-  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-    <button class="btn btn-gold" onclick="addEnemy()">＋ Añadir Enemigo</button>
-    <button class="btn btn-ghost btn-sm" onclick="clearAllEnemies()">✕ Limpiar Arena</button>
-    <span style="font-size:10px;color:var(--text3);font-family:'Share Tech Mono',monospace">Máx. 4 enemigos simultáneos</span>
+  <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+    <button class="btn btn-primary" onclick="addEnemy()">+ Añadir Enemigo</button>
+    <button class="btn btn-sm" onclick="clearAllEnemies()">x Limpiar Arena</button>
+    <span style="font-size:9px;color:var(--dim)">Max. 8 enemigos simultaneos</span>
   </div>
 </div>
 
@@ -729,8 +553,8 @@ body {
 <div class="turn-bar">
   <div class="turn-counter"><span>Turno actual</span><span id="turn-number">0</span></div>
   <div class="turn-actions">
-    <button class="btn btn-gold" id="btn-next-turn" onclick="nextTurn()" disabled>▶ Ejecutar Turno</button>
-    <button class="btn btn-ghost btn-sm" onclick="resetCombat()">⟳ Reiniciar Combate</button>
+    <button class="btn btn-primary" id="btn-next-turn" onclick="nextTurn()" disabled>> Ejecutar Turno</button>
+    <button class="btn btn-sm" onclick="resetCombat()">~ Reiniciar Combate</button>
   </div>
 </div>
 
@@ -740,14 +564,14 @@ body {
 <!-- LOG -->
 <div class="log-panel">
   <div class="log-header">
-    <div class="log-header-title">◈ Historial de Combate</div>
-    <div style="display:flex;gap:6px">
-      <button class="btn btn-ghost btn-sm" onclick="copyLastAction()">Copiar última acción</button>
-      <button class="btn btn-ghost btn-sm" onclick="clearLog()">Limpiar log</button>
+    <div class="log-title">> Historial de Combate</div>
+    <div style="display:flex;gap:5px">
+      <button class="btn btn-sm" onclick="copyLastAction()">Copiar ultima accion</button>
+      <button class="btn btn-sm" onclick="clearLog()">Limpiar log</button>
     </div>
   </div>
   <div class="log-body" id="log-body">
-    <div class="log-entry info">El sistema está listo. Configura tus enemigos y presiona ▶ Ejecutar Turno.</div>
+    <div class="log-entry info">Sistema listo. Configura tus enemigos y presiona [Ejecutar Turno].</div>
   </div>
 </div>
 
@@ -756,23 +580,23 @@ body {
 // DATA
 // ============================================================
 const DIFFICULTY = {
-  facil:     { label: 'Fácil',     damageDice: [4],    defenseDice: [4],    hp: 8,  reward: 50,   color: '#4a8a4a' },
-  media:     { label: 'Media',     damageDice: [6],    defenseDice: [6],    hp: 14, reward: 150,  color: '#8a8a2a' },
-  dificil:   { label: 'Difícil',   damageDice: [8],    defenseDice: [8],    hp: 20, reward: 300,  color: '#8a4a2a' },
-  epica:     { label: 'Épica',     damageDice: [8,8],  defenseDice: [8,8],  hp: 30, reward: 750,  color: '#6a2a8a' },
-  legendaria:{ label: 'Legendaria',damageDice: [10,10],defenseDice: [10,10],hp: 45, reward: 1500, color: '#8a1a3a' }
+  facil:     { label:'Facil',     damageDice:[4],     defenseDice:[4],     hp:8,  reward:50   },
+  media:     { label:'Media',     damageDice:[6],     defenseDice:[6],     hp:14, reward:150  },
+  dificil:   { label:'Dificil',   damageDice:[8],     defenseDice:[8],     hp:20, reward:300  },
+  epica:     { label:'Epica',     damageDice:[8,8],   defenseDice:[8,8],   hp:30, reward:750  },
+  legendaria:{ label:'Legendaria',damageDice:[10,10], defenseDice:[10,10], hp:45, reward:1500 }
 };
 
 const EFFECTS_DEF = {
-  burn:   { label: 'Quemado',    tag: 'burn',   desc: '1d4 daño/turno' },
-  poison: { label: 'Veneno',     tag: 'poison', desc: '−2 HP/turno' },
-  bleed:  { label: 'Sangrado',   tag: 'bleed',  desc: '−1 STR c/2 turnos' },
-  stun:   { label: 'Aturdido',   tag: 'stun',   desc: 'Pierde acción' },
-  regen:  { label: 'Regenerac.', tag: 'regen',  desc: '+2 HP/turno' },
-  marked: { label: 'Marcado',    tag: 'marked', desc: '+1d4 al siguiente daño' }
+  burn:   { label:'Quemado',   tag:'burn',   desc:'1d4 daño/turno' },
+  poison: { label:'Veneno',    tag:'poison', desc:'-2 HP/turno' },
+  bleed:  { label:'Sangrado',  tag:'bleed',  desc:'-1 STR c/2 turnos' },
+  stun:   { label:'Aturdido',  tag:'stun',   desc:'Pierde accion' },
+  regen:  { label:'Regenerac.',tag:'regen',  desc:'+2 HP/turno' },
+  marked: { label:'Marcado',   tag:'marked', desc:'+1d4 al siguiente daño' }
 };
 
-const EXTRA_DICE_OPTIONS = ['—','1d4','1d6','1d8','1d10','1d12','2d4','2d6','2d8','2d10','1d20'];
+const EXTRA_DICE = ['—','1d4','1d6','1d8','1d10','1d12','2d4','2d6','2d8','2d10','1d20'];
 
 // ============================================================
 // STATE
@@ -781,45 +605,38 @@ let enemies = [];
 let turnNumber = 0;
 let lastTurnMsg = '';
 let enemyIdCounter = 0;
+// Track which slots are currently open (by id)
+const openSlots = new Set();
 
 // ============================================================
 // DICE
 // ============================================================
 function roll(sides) { return Math.floor(Math.random() * sides) + 1; }
-function rollDice(sides, count = 1) {
-  let total = 0, rolls = [];
-  for (let i = 0; i < count; i++) { const r = roll(sides); total += r; rolls.push(r); }
-  return { total, rolls };
+function rollDice(sides, count=1) {
+  let total=0, rolls=[];
+  for(let i=0;i<count;i++){const r=roll(sides);total+=r;rolls.push(r);}
+  return {total,rolls};
 }
 function parseDice(str) {
-  // returns {total, label}
-  if (!str || str === '—') return { total: 0, label: '' };
-  const m = str.match(/^(\d+)d(\d+)$/i);
-  if (!m) return { total: 0, label: '' };
-  const count = parseInt(m[1]), sides = parseInt(m[2]);
-  const r = rollDice(sides, count);
-  return { total: r.total, rolls: r.rolls, label: `${str}[${r.rolls.join('+')}]` };
+  if(!str||str==='—') return {total:0,label:''};
+  const m=str.match(/^(\d+)d(\d+)$/i);
+  if(!m) return {total:0,label:''};
+  const count=parseInt(m[1]),sides=parseInt(m[2]);
+  const r=rollDice(sides,count);
+  return {total:r.total,rolls:r.rolls,label:`${str}[${r.rolls.join('+')}]`};
 }
 function rollDiffDice(diff) {
-  const d = DIFFICULTY[diff];
-  let total = 0, labels = [];
-  d.damageDice.forEach(s => {
-    const v = roll(s);
-    total += v;
-    labels.push(`1d${s}[${v}]`);
-  });
-  return { total, label: labels.join(' + ') };
+  const d=DIFFICULTY[diff];
+  let total=0,labels=[];
+  d.damageDice.forEach(s=>{const v=roll(s);total+=v;labels.push(`1d${s}[${v}]`);});
+  return {total,label:labels.join(' + ')};
 }
-function rollDefDice(diff, bonus = false) {
-  const d = DIFFICULTY[diff];
-  let total = 0, labels = [];
-  const dice = bonus ? [...d.defenseDice, ...d.defenseDice] : d.defenseDice;
-  dice.forEach(s => {
-    const v = roll(s);
-    total += v;
-    labels.push(`1d${s}[${v}]`);
-  });
-  return { total, label: labels.join(' + ') };
+function rollDefDice(diff, bonus=false) {
+  const d=DIFFICULTY[diff];
+  let total=0,labels=[];
+  const dice=bonus?[...d.defenseDice,...d.defenseDice]:d.defenseDice;
+  dice.forEach(s=>{const v=roll(s);total+=v;labels.push(`1d${s}[${v}]`);});
+  return {total,label:labels.join(' + ')};
 }
 
 // ============================================================
@@ -827,222 +644,247 @@ function rollDefDice(diff, bonus = false) {
 // ============================================================
 function createEnemy(id) {
   return {
-    id,
-    name: `Enemigo ${id}`,
-    difficulty: 'media',
-    hp: 14,
-    hpMax: 14,
-    alive: true,
-    configured: false,
-    effects: [],   // {type, turns}
-    abilityName: '',
-    abilityText: '',
-    abilityCooldown: 0,
-    abilityCurrentCd: 0,
-    abilityExtraDamageDice: '—',
-    abilityExtraDefDice: '—',
-    strBonus: 0,   // STR tracker
-    defending: false,
-    marked: false,
-    turnsElapsed: 0
+    id, name:`Enemigo ${id}`, difficulty:'media',
+    hp:14, hpMax:14, alive:true, configured:false,
+    effects:[], abilityName:'', abilityText:'',
+    abilityCooldown:0, abilityCurrentCd:0,
+    abilityExtraDamageDice:'—', abilityExtraDefDice:'—',
+    strBonus:0, defending:false, marked:false, turnsElapsed:0
   };
 }
 
 // ============================================================
-// RENDER ENEMY SLOT
+// HP BAR HELPERS
+// ============================================================
+function hpBarHTML(hp, hpMax) {
+  const pct = hpMax>0 ? hp/hpMax : 0;
+  const filled = Math.round(pct*10);
+  const cls = pct<=0.25?'critical':pct<=0.5?'low':'';
+  let segs='';
+  for(let i=0;i<10;i++) segs+=`<span class="${i<filled?'f':'e'}">${i<filled?'█':'░'}</span>`;
+  return `<div class="hp-bar ${cls}">${segs}</div>`;
+}
+function hpBarText(hp,max) {
+  const f=Math.round(max>0?hp/max*10:0);
+  return '█'.repeat(Math.max(0,f))+'░'.repeat(Math.max(0,10-f));
+}
+
+// ============================================================
+// RENDER ENEMY SLOT (HTML string)
 // ============================================================
 function renderEnemy(e) {
   const diff = DIFFICULTY[e.difficulty];
-  const hpPct = Math.max(0, (e.hp / e.hpMax) * 100);
-  const hpClass = hpPct <= 25 ? 'hp-critical' : hpPct <= 50 ? 'hp-low' : '';
-  const hpValClass = hpPct <= 25 ? 'critical' : hpPct <= 50 ? 'low' : '';
-  const cdReady = e.abilityCooldown > 0 && e.abilityCurrentCd === 0;
-  const statusLabel = !e.configured ? 'SIN CONFIGURAR' : e.alive ? (e.hp > 0 ? 'EN COMBATE' : 'MUERTO') : 'MUERTO';
-  const statusClass = !e.configured ? 'status-inactive' : (e.alive && e.hp > 0) ? 'status-active' : 'status-dead';
-
-  const effectTags = e.effects.length === 0
-    ? `<span class="no-effects">Sin efectos activos</span>`
-    : e.effects.map((ef, i) =>
-        `<span class="effect-tag ${ef.type}" onclick="removeEffect(${e.id},${i})" title="Clic para eliminar">${EFFECTS_DEF[ef.type].label}<span class="effect-turns">[${ef.turns}t]</span></span>`
-      ).join('');
+  const pct = e.hpMax>0 ? e.hp/e.hpMax : 0;
+  const hpValCls = pct<=0.25?'critical':pct<=0.5?'low':'';
+  const cdReady = e.abilityCooldown>0 && e.abilityCurrentCd===0;
+  const statusLabel = !e.configured?'SIN CONFIG':e.alive&&e.hp>0?'EN COMBATE':'MUERTO';
+  const badgeCls = !e.configured?'':'slot-badge '+(e.alive&&e.hp>0?'active':'dead');
 
   return `
-<div class="enemy-slot${!e.alive || e.hp <= 0 ? ' dead-slot' : ''}" id="slot-${e.id}">
-  <div class="slot-header">
-    <span class="slot-number">◈ ENEMIGO #${e.id}</span>
-    <span class="slot-status ${statusClass}">${statusLabel}</span>
+<div class="enemy-slot${!e.alive||e.hp<=0?' dead-slot':''}" id="slot-${e.id}">
+  <div class="slot-header" onclick="toggleSlot(${e.id})">
+    <div style="display:flex;align-items:center;min-width:0">
+      <span class="slot-num">ENE-${String(e.id).padStart(2,'0')}</span>
+      <span class="slot-name">${e.configured?e.name:''}</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
+      <span class="slot-badge ${e.configured?(e.alive&&e.hp>0?'active':'dead'):''}">${statusLabel}</span>
+      <span class="slot-arrow" id="sarr-${e.id}">></span>
+    </div>
   </div>
-  <div class="slot-body">
+  <div class="slot-body" id="sbody-${e.id}">
 
-    <!-- BASIC CONFIG -->
-    <div class="config-section">
-      <div class="section-toggle" onclick="toggleSection('basic-${e.id}')">
-        <div class="config-section-title" style="margin:0;border:none">Configuración Base</div>
-        <span class="toggle-arrow open" id="arr-basic-${e.id}">▶</span>
+    <!-- BASE CONFIG -->
+    <div class="section-box">
+      <div class="section-title" onclick="toggleSec('basic-${e.id}')">
+        <span>Configuracion Base</span>
+        <span class="sec-arrow open" id="arr-basic-${e.id}">></span>
       </div>
-      <div class="collapsible" id="basic-${e.id}" style="max-height:400px">
-        <div style="height:10px"></div>
+      <div class="collapsible" id="basic-${e.id}" style="max-height:600px">
         <div class="form-row">
           <div class="form-group">
             <label>Nombre</label>
             <input type="text" id="name-${e.id}" value="${e.name}" placeholder="Nombre del enemigo" onchange="updateEnemyName(${e.id})">
           </div>
-          <div class="form-group" style="min-width:110px">
+          <div class="form-group" style="min-width:108px">
             <label>Dificultad</label>
             <select id="diff-${e.id}" onchange="applyDifficulty(${e.id})">
-              ${Object.entries(DIFFICULTY).map(([k,v]) => `<option value="${k}" ${e.difficulty===k?'selected':''}>${v.label}</option>`).join('')}
+              ${Object.entries(DIFFICULTY).map(([k,v])=>`<option value="${k}"${e.difficulty===k?' selected':''}>${v.label}</option>`).join('')}
             </select>
           </div>
         </div>
         <div class="stats-row">
           <div class="stat-chip">
-            <span class="stat-chip-label">Daño</span>
-            <span class="stat-chip-val">${DIFFICULTY[e.difficulty].damageDice.map(d=>`1d${d}`).join('+')}</span>
+            <span>Daño</span>
+            <span>${diff.damageDice.map(d=>`1d${d}`).join('+')}</span>
           </div>
           <div class="stat-chip">
-            <span class="stat-chip-label">Defensa</span>
-            <span class="stat-chip-val">${DIFFICULTY[e.difficulty].defenseDice.map(d=>`1d${d}`).join('+')}</span>
+            <span>Defensa</span>
+            <span>${diff.defenseDice.map(d=>`1d${d}`).join('+')}</span>
           </div>
           <div class="stat-chip">
-            <span class="stat-chip-label">Recomp.</span>
-            <span class="stat-chip-val">${diff.reward}✦</span>
+            <span>Recomp.</span>
+            <span>${diff.reward}G</span>
           </div>
         </div>
         <!-- HP -->
         <div class="hp-section">
-          <div class="hp-label">
-            <span class="hp-label-text">PUNTOS DE VIDA</span>
-            <span class="hp-value ${hpValClass}" id="hpval-${e.id}">${e.hp} / ${e.hpMax}</span>
+          <div class="hp-header">
+            <span class="hp-lbl">PUNTOS DE VIDA</span>
+            <span class="hp-val ${hpValCls}" id="hpval-${e.id}">${e.hp} / ${e.hpMax}</span>
           </div>
-          <div class="hp-bar-track">
-            <div class="hp-bar-fill ${hpClass}" id="hpbar-${e.id}" style="width:${hpPct}%"></div>
-          </div>
+          ${hpBarHTML(e.hp, e.hpMax)}
           <div class="hp-adjust">
-            <span class="hp-adjust-label">Ajustar HP:</span>
-            <input type="number" id="hp-dmg-${e.id}" placeholder="Daño" min="0">
-            <button class="btn btn-crimson btn-sm" onclick="applyDamage(${e.id})">- Daño</button>
+            <span class="hp-adj-lbl">Cura/Reset:</span>
             <input type="number" id="hp-heal-${e.id}" placeholder="Cura" min="0">
-            <button class="btn btn-teal btn-sm" onclick="applyHeal(${e.id})">+ Cura</button>
-            <button class="btn btn-ghost btn-sm" onclick="resetHP(${e.id})">⟳</button>
+            <button class="btn btn-action btn-sm" onclick="applyHeal(${e.id})">+ Cura</button>
+            <button class="btn btn-sm" onclick="resetHP(${e.id})">~ Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DUAL DAMAGE -->
+    <div class="dmg-section">
+      <div class="dmg-title">> Aplicar Daño</div>
+      <div class="dmg-cols">
+        <div class="dmg-col">
+          <div class="dmg-col-lbl">Daño Enfrentado</div>
+          <div class="dmg-col-hint">Resta la tirada de defensa al daño recibido.</div>
+          <div class="dmg-col-row">
+            <input type="number" id="hp-dmg-${e.id}" placeholder="Daño" min="0">
+            <button class="btn btn-action btn-sm" onclick="applyDamage(${e.id})">-HP</button>
+          </div>
+        </div>
+        <div class="dmg-col">
+          <div class="dmg-col-lbl">Daño Directo</div>
+          <div class="dmg-col-hint">Aplica daño ignorando defensa.</div>
+          <div class="dmg-col-row">
+            <input type="number" id="hp-direct-${e.id}" placeholder="Daño" min="0">
+            <button class="btn btn-sm" onclick="applyDirectDamage(${e.id})">-HP</button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- ABILITY -->
-    <div class="config-section">
-      <div class="section-toggle" onclick="toggleSection('abil-${e.id}')">
-        <div class="config-section-title" style="margin:0;border:none">Habilidad Especial</div>
-        <span class="toggle-arrow open" id="arr-abil-${e.id}">▶</span>
+    <div class="section-box">
+      <div class="section-title" onclick="toggleSec('abil-${e.id}')">
+        <span>Habilidad Especial</span>
+        <span class="sec-arrow open" id="arr-abil-${e.id}">></span>
       </div>
-      <div class="collapsible" id="abil-${e.id}" style="max-height:600px">
-        <div style="height:10px"></div>
+      <div class="collapsible" id="abil-${e.id}" style="max-height:700px">
         <div class="form-row">
           <div class="form-group">
             <label>Nombre habilidad</label>
-            <input type="text" id="abilname-${e.id}" value="${e.abilityName}" placeholder="Ej: Pisotón, Rugido...">
+            <input type="text" id="abilname-${e.id}" value="${e.abilityName}" placeholder="Ej: Pisotón...">
           </div>
-          <div class="form-group" style="min-width:80px">
+          <div class="form-group" style="min-width:75px">
             <label>CD (turnos)</label>
-            <input type="number" id="abilcd-${e.id}" value="${e.abilityCooldown}" min="0" max="20" placeholder="0">
+            <input type="number" id="abilcd-${e.id}" value="${e.abilityCooldown}" min="0" max="20">
           </div>
         </div>
-        <div class="form-group" style="margin-bottom:8px">
-          <label>Descripción / efecto</label>
-          <textarea id="abiltext-${e.id}" placeholder="Ej: Aplica Quemado 2 turnos + daño extra...">${e.abilityText}</textarea>
+        <div class="form-group" style="margin-bottom:7px">
+          <label>Descripcion / efecto</label>
+          <textarea id="abiltext-${e.id}" placeholder="Ej: Aplica Quemado 2 turnos...">${e.abilityText}</textarea>
         </div>
-        <div class="dice-extras-row">
-          <div class="dice-extra-group">
+        <div class="dice-row">
+          <div class="dice-grp">
             <label>Dado extra daño</label>
             <select id="abilexdmg-${e.id}">
-              ${EXTRA_DICE_OPTIONS.map(o=>`<option value="${o}" ${e.abilityExtraDamageDice===o?'selected':''}>${o}</option>`).join('')}
+              ${EXTRA_DICE.map(o=>`<option value="${o}"${e.abilityExtraDamageDice===o?' selected':''}>${o}</option>`).join('')}
             </select>
           </div>
-          <div class="dice-extra-group">
+          <div class="dice-grp">
             <label>Dado extra def.</label>
             <select id="abilexdef-${e.id}">
-              ${EXTRA_DICE_OPTIONS.map(o=>`<option value="${o}" ${e.abilityExtraDefDice===o?'selected':''}>${o}</option>`).join('')}
+              ${EXTRA_DICE.map(o=>`<option value="${o}"${e.abilityExtraDefDice===o?' selected':''}>${o}</option>`).join('')}
             </select>
           </div>
         </div>
-        <div class="ability-section" style="margin-top:10px">
-          <div class="ability-title">
-            Estado de habilidad
-            <span class="ability-cd-badge${cdReady?' ready':''}" id="cd-badge-${e.id}">
-              ${e.abilityCooldown===0 ? 'SIN CD' : cdReady ? '✦ LISTA' : `CD: ${e.abilityCurrentCd}/${e.abilityCooldown}`}
-            </span>
-          </div>
-          <span style="font-size:11px;color:var(--text2);font-style:italic">${e.abilityName||'Sin habilidad — atacará normalmente cada turno'}</span>
+        <div class="abil-status">
+          <span class="abil-status-lbl">${e.abilityName||'Sin habilidad'}</span>
+          <span class="cd-badge${cdReady?' ready':''}" id="cd-badge-${e.id}">
+            ${e.abilityCooldown===0?'SIN CD':cdReady?'[LISTA]':`CD: ${e.abilityCurrentCd}/${e.abilityCooldown}`}
+          </span>
         </div>
-        <button class="btn btn-ghost btn-sm" style="margin-top:6px" onclick="saveAbility(${e.id})">✓ Guardar habilidad</button>
-      </div>
-    </div>
-
-    <!-- EFFECTS -->
-    <div class="config-section">
-      <div class="section-toggle" onclick="toggleSection('efx-${e.id}')">
-        <div class="config-section-title" style="margin:0;border:none">Estados / Efectos</div>
-        <span class="toggle-arrow open" id="arr-efx-${e.id}">▶</span>
-      </div>
-      <div class="collapsible" id="efx-${e.id}" style="max-height:300px">
-        <div style="height:10px"></div>
-        <div class="effects-bar" id="effects-${e.id}">${effectTags}</div>
-        <div class="add-effect-row">
-          <select id="efxtype-${e.id}">
-            ${Object.entries(EFFECTS_DEF).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('')}
-          </select>
-          <input type="number" id="efxturns-${e.id}" value="2" min="1" max="20" style="width:55px" placeholder="T">
-          <button class="btn btn-ghost btn-sm" onclick="addEffect(${e.id})">+ Añadir</button>
-        </div>
+        <button class="btn btn-sm" style="margin-top:7px;width:100%" onclick="saveAbility(${e.id})">[ Guardar Habilidad ]</button>
       </div>
     </div>
 
     <!-- ACTIONS -->
     ${e.configured ? `
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">
-      <button class="btn btn-crimson btn-sm" onclick="executeTurnSingle(${e.id})">⚔ Turno Individual</button>
-      <button class="btn btn-ghost btn-sm" onclick="removeEnemy(${e.id})">✕ Eliminar</button>
+      <button class="btn btn-action btn-sm" onclick="executeTurnSingle(${e.id})">[ATK] Turno Individual</button>
+      <button class="btn btn-sm" onclick="removeEnemy(${e.id})">[ Eliminar ]</button>
     </div>` : `
-    <button class="btn btn-gold" style="width:100%;margin-top:4px" onclick="configureEnemy(${e.id})">✓ Activar Enemigo</button>
+    <button class="btn btn-primary" style="width:100%;margin-top:4px" onclick="configureEnemy(${e.id})">[ Activar Enemigo ]</button>
     `}
   </div>
 </div>`;
 }
 
-function toggleSection(id) {
-  const el = document.getElementById(id);
-  const arrow = document.getElementById('arr-' + id);
-  if (!el) return;
-  if (el.style.maxHeight === '0px') {
-    el.style.maxHeight = el.scrollHeight + 200 + 'px';
-    if (arrow) arrow.classList.add('open');
+// ============================================================
+// TOGGLE FUNCTIONS
+// ============================================================
+function toggleSlot(id) {
+  const body  = document.getElementById(`sbody-${id}`);
+  const arrow = document.getElementById(`sarr-${id}`);
+  if (!body) return;
+  if (body.classList.contains('expanded')) {
+    body.classList.remove('expanded');
+    if(arrow) arrow.classList.remove('open');
+    openSlots.delete(id);
   } else {
-    el.style.maxHeight = '0px';
-    if (arrow) arrow.classList.remove('open');
+    body.classList.add('expanded');
+    if(arrow) arrow.classList.add('open');
+    openSlots.add(id);
   }
 }
 
+function toggleSec(id) {
+  const el    = document.getElementById(id);
+  const arrow = document.getElementById('arr-' + id);
+  if (!el) return;
+  if (el.style.maxHeight === '0px' || el.style.maxHeight === '') {
+    el.style.maxHeight = el.scrollHeight + 300 + 'px';
+    if(arrow) arrow.classList.add('open');
+  } else {
+    el.style.maxHeight = '0px';
+    if(arrow) arrow.classList.remove('open');
+  }
+}
+
+// ============================================================
+// RENDER ARENA — preserves open slots
+// ============================================================
 function renderArena() {
   const arena = document.getElementById('arena');
   if (enemies.length === 0) {
-    arena.innerHTML = `<div style="padding:40px;text-align:center;color:var(--text3);font-style:italic;font-size:13px;grid-column:1/-1">No hay enemigos en la arena. Añade uno o genera un encuentro.</div>`;
+    arena.innerHTML = `<div class="empty-arena">[ arena vacia — añade enemigos o genera un encuentro ]</div>`;
   } else {
     arena.innerHTML = enemies.map(e => renderEnemy(e)).join('');
+    // Restore previously open slots
+    openSlots.forEach(id => {
+      const body  = document.getElementById(`sbody-${id}`);
+      const arrow = document.getElementById(`sarr-${id}`);
+      if (body)  body.classList.add('expanded');
+      if (arrow) arrow.classList.add('open');
+    });
   }
   updateNextTurnBtn();
 }
 
 function updateNextTurnBtn() {
   const btn = document.getElementById('btn-next-turn');
-  const activeEnemies = enemies.filter(e => e.configured && e.alive && e.hp > 0);
-  btn.disabled = activeEnemies.length === 0;
+  btn.disabled = enemies.filter(e => e.configured && e.alive && e.hp > 0).length === 0;
 }
 
 // ============================================================
 // ENEMY MANAGEMENT
 // ============================================================
 function addEnemy() {
-  if (enemies.length >= 4) { showNotif('Máximo 4 enemigos simultáneos.'); return; }
+  if (enemies.length >= 8) { showNotif('Maximo 8 enemigos.'); return; }
   enemyIdCounter++;
   enemies.push(createEnemy(enemyIdCounter));
   renderArena();
@@ -1051,11 +893,13 @@ function addEnemy() {
 
 function removeEnemy(id) {
   enemies = enemies.filter(e => e.id !== id);
+  openSlots.delete(id);
   renderArena();
 }
 
 function clearAllEnemies() {
   enemies = [];
+  openSlots.clear();
   turnNumber = 0;
   document.getElementById('turn-number').textContent = '0';
   renderArena();
@@ -1066,6 +910,9 @@ function updateEnemyName(id) {
   const e = getEnemy(id);
   if (!e) return;
   e.name = document.getElementById(`name-${id}`).value || `Enemigo ${id}`;
+  // Only update the name span, no full re-render
+  const nameEl = document.querySelector(`#slot-${id} .slot-name`);
+  if (nameEl && e.configured) nameEl.textContent = e.name;
 }
 
 function applyDifficulty(id) {
@@ -1074,7 +921,7 @@ function applyDifficulty(id) {
   const diff = document.getElementById(`diff-${id}`).value;
   e.difficulty = diff;
   e.hpMax = DIFFICULTY[diff].hp;
-  e.hp = DIFFICULTY[diff].hp;
+  e.hp    = DIFFICULTY[diff].hp;
   renderArena();
 }
 
@@ -1085,38 +932,73 @@ function configureEnemy(id) {
   e.difficulty = document.getElementById(`diff-${id}`).value;
   const diff = DIFFICULTY[e.difficulty];
   e.hpMax = diff.hp;
-  e.hp = diff.hp;
+  e.hp    = diff.hp;
   e.configured = true;
   e.alive = true;
   saveAbility(id, true);
+  openSlots.add(id); // keep it open after activating
   renderArena();
-  appendLog('info', `${e.name} entra en combate. [${diff.label} | HP: ${e.hp} | Recompensa: ${diff.reward} oro]`, null);
+  appendLog('info', `${e.name} entra en combate. [${diff.label} | HP: ${e.hp} | Recompensa: ${diff.reward}G]`, null);
   updateNextTurnBtn();
 }
 
-function saveAbility(id, silent = false) {
+function saveAbility(id, silent=false) {
   const e = getEnemy(id);
   if (!e) return;
-  e.abilityName = document.getElementById(`abilname-${id}`).value || '';
-  e.abilityText = document.getElementById(`abiltext-${id}`).value || '';
-  e.abilityCooldown = parseInt(document.getElementById(`abilcd-${id}`).value) || 0;
-  e.abilityCurrentCd = 0; // ready from start
+  e.abilityName            = document.getElementById(`abilname-${id}`).value || '';
+  e.abilityText            = document.getElementById(`abiltext-${id}`).value || '';
+  e.abilityCooldown        = parseInt(document.getElementById(`abilcd-${id}`).value) || 0;
+  e.abilityCurrentCd       = 0;
   e.abilityExtraDamageDice = document.getElementById(`abilexdmg-${id}`).value;
-  e.abilityExtraDefDice = document.getElementById(`abilexdef-${id}`).value;
+  e.abilityExtraDefDice    = document.getElementById(`abilexdef-${id}`).value;
   if (!silent) { showNotif('Habilidad guardada.'); renderArena(); }
 }
 
 function getEnemy(id) { return enemies.find(e => e.id === id); }
 
-// HP adjustments
+// ============================================================
+// HP ADJUSTMENTS — targeted DOM updates (no full re-render)
+// ============================================================
+function refreshHpUI(e) {
+  // Update hp value text
+  const valEl = document.getElementById(`hpval-${e.id}`);
+  if (valEl) {
+    const pct = e.hpMax > 0 ? e.hp/e.hpMax : 0;
+    valEl.className = 'hp-val' + (pct<=0.25?' critical':pct<=0.5?' low':'');
+    valEl.textContent = `${e.hp} / ${e.hpMax}`;
+  }
+  // Update hp bar
+  const barParent = document.querySelector(`#sbody-${e.id} .hp-bar`);
+  if (barParent) {
+    const pct = e.hpMax>0 ? e.hp/e.hpMax : 0;
+    const filled = Math.round(pct*10);
+    const cls = pct<=0.25?'critical':pct<=0.5?'low':'';
+    barParent.className = `hp-bar ${cls}`;
+    barParent.innerHTML = Array.from({length:10},(_,i)=>`<span class="${i<filled?'f':'e'}">${i<filled?'█':'░'}</span>`).join('');
+  }
+  // Dead slot class
+  const slotEl = document.getElementById(`slot-${e.id}`);
+  if (slotEl) {
+    if (!e.alive || e.hp<=0) slotEl.classList.add('dead-slot');
+    else slotEl.classList.remove('dead-slot');
+  }
+  // Badge
+  const badgeEl = document.querySelector(`#slot-${e.id} .slot-badge`);
+  if (badgeEl) {
+    const alive = e.alive && e.hp>0;
+    badgeEl.className = 'slot-badge ' + (alive ? 'active' : 'dead');
+    badgeEl.textContent = alive ? 'EN COMBATE' : 'MUERTO';
+  }
+}
+
 function applyDamage(id) {
   const e = getEnemy(id);
   if (!e || !e.alive) return;
   const val = parseInt(document.getElementById(`hp-dmg-${id}`).value) || 0;
   if (val <= 0) return;
   let defRoll = rollDefDice(e.difficulty, e.defending);
-  let marked = e.effects.find(ef => ef.type === 'marked');
   let markedBonus = 0;
+  const marked = e.effects.find(ef => ef.type==='marked');
   if (marked) {
     const mr = parseDice('1d4');
     markedBonus = mr.total;
@@ -1125,13 +1007,28 @@ function applyDamage(id) {
   const totalDmg = Math.max(0, val + markedBonus - defRoll.total);
   e.hp = Math.max(0, e.hp - totalDmg);
   e.defending = false;
-  const msg = `${e.name} recibe ${val}${markedBonus>0?`+${markedBonus}(Marcado)`:''} daño — Defensa: ${defRoll.label} = ${defRoll.total} — Daño final: ${totalDmg} — HP: ${e.hp}/${e.hpMax}`;
-  appendLog('attack', msg, null);
-  const copyMsg = `⚔ **${e.name}** recibe daño\n  Ataque: ${val}${markedBonus>0?` + ${markedBonus}(Marcado)`:''} | Defensa: ${defRoll.label} = ${defRoll.total}\n  Daño final: **${totalDmg}** | HP: ${buildHpBarText(e.hp,e.hpMax)} ${e.hp}/${e.hpMax}`;
+  appendLog('attack', `${e.name}: ${val}${markedBonus>0?`+${markedBonus}(Marc)`:''} dmg — Def: ${defRoll.label}=${defRoll.total} — Final: ${totalDmg} — HP: ${e.hp}/${e.hpMax}`, null);
+  const copyMsg = `[ATK] ${e.name}\n  Ataque: ${val}${markedBonus>0?` + ${markedBonus}(Marcado)`:''} | Defensa: ${defRoll.label} = ${defRoll.total}\n  Daño final: ${totalDmg} | HP: ${hpBarText(e.hp,e.hpMax)} ${e.hp}/${e.hpMax}`;
   appendCopyBlock(copyMsg);
   lastTurnMsg = copyMsg;
   checkDeath(e);
-  renderArena();
+  refreshHpUI(e);
+  document.getElementById(`hp-dmg-${id}`).value = '';
+}
+
+function applyDirectDamage(id) {
+  const e = getEnemy(id);
+  if (!e || !e.alive) return;
+  const val = parseInt(document.getElementById(`hp-direct-${id}`).value) || 0;
+  if (val <= 0) return;
+  e.hp = Math.max(0, e.hp - val);
+  appendLog('attack', `${e.name}: ${val} daño directo — HP: ${e.hp}/${e.hpMax}`, null);
+  const copyMsg = `[DMG DIRECTO] ${e.name}\n  Daño: ${val} (sin defensa)\n  HP: ${hpBarText(e.hp,e.hpMax)} ${e.hp}/${e.hpMax}`;
+  appendCopyBlock(copyMsg);
+  lastTurnMsg = copyMsg;
+  checkDeath(e);
+  refreshHpUI(e);
+  document.getElementById(`hp-direct-${id}`).value = '';
 }
 
 function applyHeal(id) {
@@ -1140,8 +1037,9 @@ function applyHeal(id) {
   const val = parseInt(document.getElementById(`hp-heal-${id}`).value) || 0;
   if (val <= 0) return;
   e.hp = Math.min(e.hpMax, e.hp + val);
-  appendLog('info', `${e.name} recupera ${val} HP → ${e.hp}/${e.hpMax}`, null);
-  renderArena();
+  appendLog('info', `${e.name} recupera ${val} HP -> ${e.hp}/${e.hpMax}`, null);
+  refreshHpUI(e);
+  document.getElementById(`hp-heal-${id}`).value = '';
 }
 
 function resetHP(id) {
@@ -1149,31 +1047,8 @@ function resetHP(id) {
   if (!e) return;
   e.hp = e.hpMax;
   e.alive = true;
-  appendLog('info', `${e.name}: HP reiniciado → ${e.hp}/${e.hpMax}`, null);
-  renderArena();
-}
-
-// Effects
-function addEffect(id) {
-  const e = getEnemy(id);
-  if (!e) return;
-  const type = document.getElementById(`efxtype-${id}`).value;
-  const turns = parseInt(document.getElementById(`efxturns-${id}`).value) || 2;
-  // don't duplicate (except stacking is allowed by updating)
-  const existing = e.effects.find(ef => ef.type === type);
-  if (existing) existing.turns = turns;
-  else e.effects.push({ type, turns });
-  appendLog('effect', `${e.name}: Se aplica ${EFFECTS_DEF[type].label} (${turns} turnos) — ${EFFECTS_DEF[type].desc}`, null);
-  renderArena();
-}
-
-function removeEffect(id, idx) {
-  const e = getEnemy(id);
-  if (!e) return;
-  const ef = e.effects[idx];
-  e.effects.splice(idx, 1);
-  if (ef) appendLog('info', `${e.name}: Efecto ${EFFECTS_DEF[ef.type].label} eliminado.`, null);
-  renderArena();
+  appendLog('info', `${e.name}: HP reiniciado -> ${e.hp}/${e.hpMax}`, null);
+  refreshHpUI(e);
 }
 
 // ============================================================
@@ -1185,158 +1060,119 @@ function nextTurn() {
 
   turnNumber++;
   document.getElementById('turn-number').textContent = turnNumber;
+  appendLog('turn-divider', `=== TURNO ${turnNumber} ===`, null);
 
-  appendLog('turn-divider', `═══ TURNO ${turnNumber} ═══`, null);
-
-  // Collect per-enemy turn segments to build ONE unified copy block at the end
-  const turnSegments = [];
-
+  const segments = [];
   active.forEach(e => {
     const seg = executeTurnForEnemy(e, true);
-    if (seg) turnSegments.push(seg);
+    if (seg) segments.push(seg);
   });
 
-  // Build unified block if more than one enemy, otherwise just the single block
-  if (turnSegments.length > 0) {
-    const unified = buildUnifiedTurnMsg(turnSegments);
+  if (segments.length > 0) {
+    const unified = buildUnifiedTurnMsg(segments);
     lastTurnMsg = unified;
     appendCopyBlock(unified);
   }
 
-  // Check if all dead
   const stillAlive = enemies.filter(e => e.configured && e.alive && e.hp > 0);
   if (stillAlive.length === 0 && active.length > 0) {
-    appendLog('reward', `⚔ Todos los enemigos han caído. El encuentro ha concluido.`, null);
+    appendLog('reward', `++ Todos los enemigos han caido. Encuentro concluido.`, null);
     grantRewards();
   }
 
+  // Collapse ALL slots on full turn execution
+  openSlots.clear();
   renderArena();
 }
 
 function executeTurnSingle(id) {
   const e = getEnemy(id);
-  if (!e || !e.alive || e.hp <= 0) { showNotif('El enemigo no está activo.'); return; }
-  appendLog('turn-divider', `─── ${e.name} — Acción Individual ───`, null);
+  if (!e || !e.alive || e.hp <= 0) { showNotif('El enemigo no esta activo.'); return; }
+  appendLog('turn-divider', `--- ${e.name} — Accion Individual ---`, null);
   const seg = executeTurnForEnemy(e, false);
   if (seg) {
     const msg = buildUnifiedTurnMsg([seg]);
     lastTurnMsg = msg;
     appendCopyBlock(msg);
   }
-  renderArena();
+  refreshHpUI(e);
 }
 
-// Returns a segment object {name, diff, lines[], hp, hpMax, died}
-// If addToLog=true, also appends individual log lines
 function executeTurnForEnemy(e, addToLog) {
   e.turnsElapsed++;
   const lines = [];
   let stunned = false;
-  let diedFromEffects = false;
-
-  // STEP 1: Apply effects
-  let effectMsgs = [];
   let effectDmgTotal = 0;
+  const effectMsgs = [];
   const effectsCopy = [...e.effects];
 
-  effectsCopy.forEach((ef) => {
+  effectsCopy.forEach(ef => {
     if (ef.turns <= 0) return;
-    if (ef.type === 'burn') {
-      const r = rollDice(4);
-      effectDmgTotal += r.total;
-      effectMsgs.push(`🔥 Quemado: ${r.total} daño (1d4[${r.rolls[0]}])`);
-    } else if (ef.type === 'poison') {
-      effectDmgTotal += 2;
-      effectMsgs.push(`☠ Veneno: −2 HP`);
-    } else if (ef.type === 'regen') {
-      e.hp = Math.min(e.hpMax, e.hp + 2);
-      effectMsgs.push(`💚 Regeneración: +2 HP → ${e.hp}/${e.hpMax}`);
-    } else if (ef.type === 'bleed') {
-      if (e.turnsElapsed % 2 === 0) {
-        effectDmgTotal += 1;
-        effectMsgs.push(`🩸 Sangrado: −1 STR`);
-      }
-    } else if (ef.type === 'stun') {
-      stunned = true;
-      effectMsgs.push(`⚡ Aturdido: acción perdida`);
-    } else if (ef.type === 'marked') {
-      effectMsgs.push(`🔮 Marcado activo — próximo daño +1d4`);
-    }
-    // Tick down
-    const idx = e.effects.findIndex(x => x === ef);
-    if (idx !== -1) {
-      e.effects[idx].turns--;
-      if (e.effects[idx].turns <= 0) e.effects.splice(idx, 1);
-    }
+    if (ef.type==='burn')   { const r=rollDice(4); effectDmgTotal+=r.total; effectMsgs.push(`[BURN] ${r.total} dmg (1d4[${r.rolls[0]}])`); }
+    else if (ef.type==='poison') { effectDmgTotal+=2; effectMsgs.push(`[POISON] -2 HP`); }
+    else if (ef.type==='regen')  { e.hp=Math.min(e.hpMax,e.hp+2); effectMsgs.push(`[REGEN] +2 HP -> ${e.hp}/${e.hpMax}`); }
+    else if (ef.type==='bleed')  { if(e.turnsElapsed%2===0){effectDmgTotal+=1;effectMsgs.push(`[BLEED] -1 STR`);} }
+    else if (ef.type==='stun')   { stunned=true; effectMsgs.push(`[STUN] accion perdida`); }
+    else if (ef.type==='marked') { effectMsgs.push(`[MARKED] activo`); }
+    const idx = e.effects.findIndex(x=>x===ef);
+    if (idx!==-1) { e.effects[idx].turns--; if(e.effects[idx].turns<=0) e.effects.splice(idx,1); }
   });
 
-  if (effectDmgTotal > 0) {
-    e.hp = Math.max(0, e.hp - effectDmgTotal);
-    effectMsgs.push(`Daño por efectos: −${effectDmgTotal} HP → ${e.hp}/${e.hpMax}`);
+  if (effectDmgTotal>0) {
+    e.hp = Math.max(0, e.hp-effectDmgTotal);
+    effectMsgs.push(`Daño efectos: -${effectDmgTotal} -> ${e.hp}/${e.hpMax}`);
   }
-  if (effectMsgs.length > 0) {
+  if (effectMsgs.length>0) {
     const efLine = `[Efectos] ${effectMsgs.join(' | ')}`;
     lines.push(efLine);
     if (addToLog) appendLog('effect', `${e.name}: ${efLine}`, null);
   }
 
-  if (e.hp <= 0 && e.alive) {
-    diedFromEffects = true;
-    e.hp = 0; e.alive = false;
-    const reward = DIFFICULTY[e.difficulty].reward;
-    lines.push(`💀 Ha muerto por efectos. Recompensa: ${reward} oro`);
-    if (addToLog) {
-      appendLog('death', `💀 ${e.name} ha muerto por efectos de estado.`, null);
-      appendLog('reward', `✦ Recompensa: ${reward} oro`, null);
-    }
-    return { name: e.name, diff: DIFFICULTY[e.difficulty].label, lines, hp: 0, hpMax: e.hpMax, died: true };
+  if (e.hp<=0 && e.alive) {
+    e.hp=0; e.alive=false;
+    const reward=DIFFICULTY[e.difficulty].reward;
+    lines.push(`[MUERTO] por efectos. Recompensa: ${reward}G`);
+    if (addToLog) { appendLog('death',`${e.name} ha muerto por efectos.`,null); appendLog('reward',`Recompensa: ${reward}G`,null); }
+    return {name:e.name,diff:DIFFICULTY[e.difficulty].label,lines,hp:0,hpMax:e.hpMax,died:true};
   }
 
-  // STEP 2: Action
   if (stunned) {
-    lines.push(`⚡ Aturdido — pierde su acción este turno.`);
-    if (addToLog) appendLog('info', `${e.name} está Aturdido — pierde su acción.`, null);
-    return { name: e.name, diff: DIFFICULTY[e.difficulty].label, lines, hp: e.hp, hpMax: e.hpMax, died: false };
+    lines.push(`[STUN] — pierde su accion este turno.`);
+    if (addToLog) appendLog('info',`${e.name} esta Aturdido — pierde su accion.`,null);
+    return {name:e.name,diff:DIFFICULTY[e.difficulty].label,lines,hp:e.hp,hpMax:e.hpMax,died:false};
   }
 
-  // Reduce CD first
-  if (e.abilityCooldown > 0 && e.abilityCurrentCd > 0) {
-    e.abilityCurrentCd = Math.max(0, e.abilityCurrentCd - 1);
-  }
+  if (e.abilityCooldown>0 && e.abilityCurrentCd>0) e.abilityCurrentCd=Math.max(0,e.abilityCurrentCd-1);
 
-  const hasAbility = e.abilityName && e.abilityName.trim() !== '';
-  const abilityReady = hasAbility && e.abilityCurrentCd === 0;
+  const hasAbility = e.abilityName && e.abilityName.trim()!=='';
+  const abilityReady = hasAbility && e.abilityCurrentCd===0;
 
   if (abilityReady) {
-    const dmgRoll = rollDiffDice(e.difficulty);
-    const extraDmg = parseDice(e.abilityExtraDamageDice);
-    const extraDef = parseDice(e.abilityExtraDefDice);
-    const totalDmg = dmgRoll.total + extraDmg.total;
-    const defStr = extraDef.total > 0 ? ` | Def. extra: ${extraDef.label} (+${extraDef.total})` : '';
-    let skillLine = `✦ HABILIDAD [${e.abilityName}]: ${dmgRoll.label}${extraDmg.total>0?' + '+extraDmg.label:''} = ${totalDmg} daño${defStr}`;
-    if (e.abilityText) skillLine += ` | ${e.abilityText}`;
-    if (e.abilityCooldown > 0) {
-      e.abilityCurrentCd = e.abilityCooldown;
-      skillLine += ` | CD: ${e.abilityCooldown}t`;
-    }
+    const dmgRoll=rollDiffDice(e.difficulty);
+    const extraDmg=parseDice(e.abilityExtraDamageDice);
+    const extraDef=parseDice(e.abilityExtraDefDice);
+    const totalDmg=dmgRoll.total+extraDmg.total;
+    const defStr=extraDef.total>0?` | Def extra: ${extraDef.label}(+${extraDef.total})`:'';
+    let skillLine=`[HABILIDAD: ${e.abilityName}] ${dmgRoll.label}${extraDmg.total>0?' + '+extraDmg.label:''} = ${totalDmg} dmg${defStr}`;
+    if (e.abilityText) skillLine+=` | ${e.abilityText}`;
+    if (e.abilityCooldown>0) { e.abilityCurrentCd=e.abilityCooldown; skillLine+=` | CD: ${e.abilityCooldown}t`; }
     lines.push(skillLine);
-    if (addToLog) appendLog('skill', `${e.name} — ${skillLine}`, null);
+    if (addToLog) appendLog('skill',`${e.name} — ${skillLine}`,null);
   } else {
-    const dmgRoll = rollDiffDice(e.difficulty);
-    const atkLine = `⚔ Ataque: ${dmgRoll.label} = ${dmgRoll.total} daño`;
+    const dmgRoll=rollDiffDice(e.difficulty);
+    const atkLine=`[ATK] ${dmgRoll.label} = ${dmgRoll.total} dmg`;
     lines.push(atkLine);
-    if (addToLog) appendLog('attack', `${e.name} — ${atkLine}`, null);
+    if (addToLog) appendLog('attack',`${e.name} — ${atkLine}`,null);
   }
 
-  return { name: e.name, diff: DIFFICULTY[e.difficulty].label, lines, hp: e.hp, hpMax: e.hpMax, died: false };
+  return {name:e.name,diff:DIFFICULTY[e.difficulty].label,lines,hp:e.hp,hpMax:e.hpMax,died:false};
 }
 
-// Build one unified copyable text block for ALL enemies in this turn
 function buildUnifiedTurnMsg(segments) {
-  const hdr = `🎲 **TURNO ${turnNumber}**`;
+  const hdr = `[TURNO ${turnNumber}]`;
   const parts = segments.map(seg => {
-    const bar = buildHpBarText(seg.hp, seg.hpMax);
-    let block = `**${seg.name}** *(${seg.diff})*`;
+    const bar = hpBarText(seg.hp, seg.hpMax);
+    let block = `${seg.name} (${seg.diff})`;
     seg.lines.forEach(l => { block += `\n  ${l}`; });
     block += `\n  HP: ${bar} ${seg.hp}/${seg.hpMax}`;
     return block;
@@ -1344,15 +1180,14 @@ function buildUnifiedTurnMsg(segments) {
   return hdr + '\n' + parts.join('\n\n');
 }
 
-// Append a standalone copy block to the log (no individual log line text)
 function appendCopyBlock(msg) {
   const body = document.getElementById('log-body');
   const entry = document.createElement('div');
   entry.className = 'log-entry';
-  entry.style.padding = '4px 12px';
+  entry.style.padding = '3px 9px';
   const uid = 'cb_' + Date.now();
   const escaped = msg.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  entry.innerHTML = `<div class="discord-block" onclick="copyActionBlock(this,'${uid}')"><pre id="${uid}" style="white-space:pre-wrap;margin:0">${escaped}</pre><span class="discord-copied">¡Copiado!</span></div>`;
+  entry.innerHTML = `<div class="copy-block" onclick="copyActionBlock(this,'${uid}')"><pre id="${uid}" style="white-space:pre-wrap;margin:0;font-family:'Share Tech Mono',monospace;font-size:10px">${escaped}</pre><span class="copied-badge">COPIADO</span></div>`;
   body.appendChild(entry);
   body.scrollTop = body.scrollHeight;
 }
@@ -1362,56 +1197,37 @@ function copyActionBlock(el, uid) {
   const text = pre ? pre.textContent : '';
   navigator.clipboard.writeText(text).catch(() => {
     const ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
   });
-  const badge = el.querySelector('.discord-copied');
-  if (badge) { badge.classList.add('show'); setTimeout(() => badge.classList.remove('show'), 1800); }
-  showNotif('¡Acción copiada al portapapeles!');
+  const badge = el.querySelector('.copied-badge');
+  if (badge) { badge.classList.add('show'); setTimeout(()=>badge.classList.remove('show'),1800); }
+  showNotif('Accion copiada al portapapeles.');
 }
 
 function checkDeath(e) {
-  if (e.hp <= 0 && e.alive) {
-    e.hp = 0;
-    e.alive = false;
-    const reward = DIFFICULTY[e.difficulty].reward;
-    appendLog('death', `💀 ${e.name} ha muerto.`, null);
-    appendLog('reward', `✦ Recompensa: ${reward} oro por ${e.name}`, null);
+  if (e.hp<=0 && e.alive) {
+    e.hp=0; e.alive=false;
+    appendLog('death',`${e.name} ha muerto.`,null);
+    appendLog('reward',`Recompensa: ${DIFFICULTY[e.difficulty].reward}G por ${e.name}`,null);
     return true;
   }
   return false;
 }
 
 function grantRewards() {
-  const dead = enemies.filter(e => e.configured && !e.alive);
-  let total = dead.reduce((s, e) => s + DIFFICULTY[e.difficulty].reward, 0);
-  const rewardMsg = `💰 **ENCUENTRO FINALIZADO**\nRecompensa total: ${total} oro\n${dead.map(e=>`  • ${e.name} (${DIFFICULTY[e.difficulty].label}): ${DIFFICULTY[e.difficulty].reward} oro`).join('\n')}`;
-  appendLog('reward', `💰 Recompensa total: ${total} oro`, null);
+  const dead = enemies.filter(e=>e.configured&&!e.alive);
+  const total = dead.reduce((s,e)=>s+DIFFICULTY[e.difficulty].reward,0);
+  const rewardMsg = `[ENCUENTRO FINALIZADO]\nRecompensa total: ${total}G\n${dead.map(e=>`  ${e.name} (${DIFFICULTY[e.difficulty].label}): ${DIFFICULTY[e.difficulty].reward}G`).join('\n')}`;
+  appendLog('reward',`Recompensa total: ${total}G`,null);
   appendCopyBlock(rewardMsg);
   lastTurnMsg = rewardMsg;
 }
 
 // ============================================================
-// COPY MESSAGES
-// ============================================================
-function buildHpBarText(hp, max) {
-  const pct = max > 0 ? hp / max : 0;
-  const filled = Math.round(pct * 10);
-  return '█'.repeat(Math.max(0,filled)) + '░'.repeat(Math.max(0,10 - filled));
-}
-
-function buildActionMsg(e, type, data) {
-  if (type === 'damage') {
-    return `⚔ **${e.name}** recibe daño — Ataque: ${data.dmg}${data.marked>0?` + ${data.marked}(Marcado)`:''} | Defensa: ${data.def.label} = ${data.def.total} | **Daño final: ${data.final}** | HP: ${e.hp}/${e.hpMax}`;
-  }
-  return '';
-}
-
-// ============================================================
 // LOG
 // ============================================================
-function appendLog(type, text, _unused) {
-  if (!text || !text.trim()) return;
+function appendLog(type, text, _) {
+  if (!text||!text.trim()) return;
   const body = document.getElementById('log-body');
   const entry = document.createElement('div');
   entry.className = `log-entry ${type}`;
@@ -1421,9 +1237,9 @@ function appendLog(type, text, _unused) {
 }
 
 function copyLastAction() {
-  if (!lastTurnMsg) { showNotif('No hay acción reciente para copiar.'); return; }
-  navigator.clipboard.writeText(lastTurnMsg).catch(() => {});
-  showNotif('¡Última acción copiada al portapapeles!');
+  if (!lastTurnMsg) { showNotif('No hay accion reciente.'); return; }
+  navigator.clipboard.writeText(lastTurnMsg).catch(()=>{});
+  showNotif('Ultima accion copiada.');
 }
 
 function clearLog() {
@@ -1434,53 +1250,44 @@ function clearLog() {
 // ENCOUNTER GENERATOR
 // ============================================================
 function generateEncounter() {
-  const players = parseInt(document.getElementById('gen-players').value) || 2;
-  const zone = parseInt(document.getElementById('gen-zone').value) || 0;
-  const cut = parseInt(document.getElementById('gen-cut').value) || 100;
+  const players = parseInt(document.getElementById('gen-players').value)||2;
+  const zone    = parseInt(document.getElementById('gen-zone').value)||0;
+  const cut     = parseInt(document.getElementById('gen-cut').value)||100;
 
-  // Encounter roll (1d6)
   const encRoll = roll(6);
-  let encType = encRoll <= 2 ? 'Ninguno' : encRoll <= 4 ? 'Normal' : encRoll === 5 ? 'Numeroso' : 'Especial';
+  let encType = encRoll<=2?'Ninguno':encRoll<=4?'Normal':encRoll===5?'Numeroso':'Especial';
 
-  // Quantity (1d(players+2)+1)
-  const sides = players + 2;
-  let qty = roll(sides) + 1;
-  if (encType === 'Numeroso') qty += 2;
-  if (encType === 'Especial') qty = Math.max(1, Math.floor(qty / 2));
-  if (encType === 'Ninguno') qty = 0;
+  const sides = players+2;
+  let qty = roll(sides)+1;
+  if (encType==='Numeroso') qty+=2;
+  if (encType==='Especial') qty=Math.max(1,Math.floor(qty/2));
+  if (encType==='Ninguno')  qty=0;
 
-  // Difficulty roll (capped by cut)
-  const rawD100 = roll(cut);
-  let adjD100 = Math.min(cut, rawD100 + zone);
-  let diffKey = 'facil';
-  if (adjD100 >= 99) diffKey = 'legendaria';
-  else if (adjD100 >= 91) diffKey = 'epica';
-  else if (adjD100 >= 76) diffKey = 'dificil';
-  else if (adjD100 >= 46) diffKey = 'media';
-  else diffKey = 'facil';
-  if (encType === 'Especial') {
-    const order = ['facil','media','dificil','epica','legendaria'];
-    const idx = order.indexOf(diffKey);
-    diffKey = order[Math.min(4, idx + 1)];
+  const rawD100=roll(cut);
+  let adjD100=Math.min(cut,rawD100+zone);
+  let diffKey='facil';
+  if (adjD100>=99) diffKey='legendaria';
+  else if (adjD100>=91) diffKey='epica';
+  else if (adjD100>=76) diffKey='dificil';
+  else if (adjD100>=46) diffKey='media';
+  if (encType==='Especial') {
+    const order=['facil','media','dificil','epica','legendaria'];
+    diffKey=order[Math.min(4,order.indexOf(diffKey)+1)];
   }
 
   const result = document.getElementById('gen-result');
   result.style.display = 'block';
-  result.innerHTML = `1d6 Encuentro: <b>${encRoll}</b> → ${encType} | 1d${sides}+1 Cantidad: <b>${qty} enemigos</b> | 1d${cut}+${zone} Dificultad: <b>${adjD100}</b> → ${DIFFICULTY[diffKey].label}
+  result.textContent = `1d6: ${encRoll} -> ${encType} | 1d${sides}+1: ${qty} enemigos | 1d${cut}+${zone}: ${adjD100} -> ${DIFFICULTY[diffKey].label}${encType==='Ninguno'?'\nSin encuentro esta vez.':`\nResultado: ${qty} enemigo(s) de dificultad ${DIFFICULTY[diffKey].label}`}`;
 
-${encType === 'Ninguno' ? '⊘ Sin encuentro esta vez.' : `Resultado: ${qty} enemigo(s) de dificultad ${DIFFICULTY[diffKey].label}`}`;
-
-  if (encType !== 'Ninguno' && qty > 0) {
-    const toAdd = Math.min(qty, 4 - enemies.length);
-    for (let i = 0; i < toAdd; i++) {
+  if (encType!=='Ninguno' && qty>0) {
+    const toAdd=Math.min(qty,8-enemies.length);
+    for (let i=0;i<toAdd;i++) {
       enemyIdCounter++;
-      const e = createEnemy(enemyIdCounter);
-      e.difficulty = diffKey;
-      e.hpMax = DIFFICULTY[diffKey].hp;
-      e.hp = DIFFICULTY[diffKey].hp;
+      const e=createEnemy(enemyIdCounter);
+      e.difficulty=diffKey; e.hpMax=DIFFICULTY[diffKey].hp; e.hp=DIFFICULTY[diffKey].hp;
       enemies.push(e);
     }
-    if (toAdd < qty) result.innerHTML += `\n⚠ Arena llena: solo se añadieron ${toAdd} de ${qty} enemigos.`;
+    if (toAdd<qty) result.textContent+=`\nArena llena: solo se añadieron ${toAdd} de ${qty}.`;
     renderArena();
     showNotif(`${toAdd} enemigo(s) añadido(s) (${DIFFICULTY[diffKey].label})`);
   }
@@ -1493,14 +1300,9 @@ function resetCombat() {
   turnNumber = 0;
   document.getElementById('turn-number').textContent = '0';
   enemies.forEach(e => {
-    e.hp = e.hpMax;
-    e.alive = true;
-    e.effects = [];
-    e.abilityCurrentCd = 0;
-    e.turnsElapsed = 0;
-    e.defending = false;
+    e.hp=e.hpMax; e.alive=true; e.effects=[]; e.abilityCurrentCd=0; e.turnsElapsed=0; e.defending=false;
   });
-  appendLog('info', '⟳ Combate reiniciado. HP restaurado para todos los enemigos.', null);
+  appendLog('info','~ Combate reiniciado. HP restaurado para todos.',null);
   renderArena();
 }
 
@@ -1511,15 +1313,14 @@ let notifTimeout;
 function showNotif(msg) {
   let notif = document.getElementById('notif');
   if (!notif) {
-    notif = document.createElement('div');
-    notif.id = 'notif';
-    notif.className = 'notif';
+    notif=document.createElement('div');
+    notif.id='notif'; notif.className='notif';
     document.body.appendChild(notif);
   }
-  notif.textContent = msg;
-  notif.style.display = 'block';
+  notif.textContent=msg;
+  notif.style.display='block';
   clearTimeout(notifTimeout);
-  notifTimeout = setTimeout(() => { notif.style.display = 'none'; }, 2200);
+  notifTimeout=setTimeout(()=>{notif.style.display='none';},2200);
 }
 
 // ============================================================
